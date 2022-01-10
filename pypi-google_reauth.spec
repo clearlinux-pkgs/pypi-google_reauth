@@ -4,7 +4,7 @@
 #
 Name     : pypi-google_reauth
 Version  : 0.1.1
-Release  : 28
+Release  : 29
 URL      : https://files.pythonhosted.org/packages/7d/86/74242e08d24ec4c436b8325dabbd7c60422b4829dfb1ad6ec117bdebea76/google-reauth-0.1.1.tar.gz
 Source0  : https://files.pythonhosted.org/packages/7d/86/74242e08d24ec4c436b8325dabbd7c60422b4829dfb1ad6ec117bdebea76/google-reauth-0.1.1.tar.gz
 Summary  : Google Reauth Library
@@ -13,11 +13,8 @@ License  : Apache-2.0
 Requires: pypi-google_reauth-license = %{version}-%{release}
 Requires: pypi-google_reauth-python = %{version}-%{release}
 Requires: pypi-google_reauth-python3 = %{version}-%{release}
-Requires: pyu2f
+Requires: pypi(pyu2f)
 BuildRequires : buildreq-distutils3
-Provides: google-reauth
-Provides: google-reauth-python
-Provides: google-reauth-python3
 BuildRequires : pypi(pyu2f)
 
 %description
@@ -68,7 +65,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1641440004
+export SOURCE_DATE_EPOCH=1641835844
 export GCC_IGNORE_WERROR=1
 export CFLAGS="$CFLAGS -fno-lto "
 export FCFLAGS="$FFLAGS -fno-lto "
