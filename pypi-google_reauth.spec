@@ -4,7 +4,7 @@
 #
 Name     : pypi-google_reauth
 Version  : 0.1.1
-Release  : 38
+Release  : 39
 URL      : https://files.pythonhosted.org/packages/7d/86/74242e08d24ec4c436b8325dabbd7c60422b4829dfb1ad6ec117bdebea76/google-reauth-0.1.1.tar.gz
 Source0  : https://files.pythonhosted.org/packages/7d/86/74242e08d24ec4c436b8325dabbd7c60422b4829dfb1ad6ec117bdebea76/google-reauth-0.1.1.tar.gz
 Summary  : Google Reauth Library
@@ -16,6 +16,9 @@ Requires: pypi-google_reauth-python3 = %{version}-%{release}
 Requires: pypi(pyu2f)
 BuildRequires : buildreq-distutils3
 BuildRequires : pypi(pyu2f)
+# Suppress stripping binaries
+%define __strip /bin/true
+%define debug_package %{nil}
 
 %description
 ============================
@@ -68,12 +71,12 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1656402664
+export SOURCE_DATE_EPOCH=1672276192
 export GCC_IGNORE_WERROR=1
-export CFLAGS="$CFLAGS -fno-lto "
-export FCFLAGS="$FFLAGS -fno-lto "
-export FFLAGS="$FFLAGS -fno-lto "
-export CXXFLAGS="$CXXFLAGS -fno-lto "
+export CFLAGS="$CFLAGS -fdebug-types-section -femit-struct-debug-baseonly -fno-lto -g1 -gno-column-info -gno-variable-location-views -gz "
+export FCFLAGS="$FFLAGS -fdebug-types-section -femit-struct-debug-baseonly -fno-lto -g1 -gno-column-info -gno-variable-location-views -gz "
+export FFLAGS="$FFLAGS -fdebug-types-section -femit-struct-debug-baseonly -fno-lto -g1 -gno-column-info -gno-variable-location-views -gz "
+export CXXFLAGS="$CXXFLAGS -fdebug-types-section -femit-struct-debug-baseonly -fno-lto -g1 -gno-column-info -gno-variable-location-views -gz "
 export MAKEFLAGS=%{?_smp_mflags}
 python3 setup.py build
 
@@ -90,7 +93,7 @@ popd
 export MAKEFLAGS=%{?_smp_mflags}
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/pypi-google_reauth
-cp %{_builddir}/google-reauth-0.1.1/LICENSE %{buildroot}/usr/share/package-licenses/pypi-google_reauth/7df059597099bb7dcf25d2a9aedfaf4465f72d8d
+cp %{_builddir}/google-reauth-%{version}/LICENSE %{buildroot}/usr/share/package-licenses/pypi-google_reauth/7df059597099bb7dcf25d2a9aedfaf4465f72d8d || :
 python3 -tt setup.py build  install --root=%{buildroot}
 echo ----[ mark ]----
 cat %{buildroot}/usr/lib/python3*/site-packages/*/requires.txt || :
